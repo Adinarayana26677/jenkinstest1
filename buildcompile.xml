@@ -1,0 +1,57 @@
+<project name="FirstProject" default="dist">
+
+<!--
+
+1. compile the java sources
+2. create a jar file
+3. copy the web files into the build folder
+4. create a zip file 
+-->
+<!--property name="app" value="2.3"/-->
+<property file="build.properties"/>
+<target name="clean">
+	
+		<delete dir="build"/>
+		<delete dir="dist"/>
+		
+</target>
+
+		<target name="init" depends="clean">
+		
+		<mkdir dir="build/classes"/>
+		<mkdir dir="build/jar"/>
+		<mkdir dir="build/web"/>
+		
+</target>
+
+         <target name="compile" depends="init">
+		 
+		 <javac srcdir="src"
+		   destdir="build/classes"/>
+		   
+</target>
+
+          <target name="jar" depends="compile">
+		  
+		  <jar destfile="build/jar/app${app}.jar" basedir="build/classes"/>
+	</target>
+		  
+		  <target name="copydemo" depends="jar">
+	      <copy todir="build/web">
+       	<fileset dir="web">
+		 <exclude name="*.txt"/>
+		 </fileset>
+		 </copy>
+	 	
+	</target>
+	
+	<target name="dist" depends="jar,copydemo">
+	  <zip destfile="dist/test${app}.zip">
+     	<fileset dir="build/web"/>
+		<fileset dir="build/jar"/>
+	  </zip>
+	  </target>
+		  
+</project>
+
+		
