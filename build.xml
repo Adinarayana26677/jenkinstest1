@@ -7,7 +7,7 @@
 3. copy the web files into the build folder
 4. create a zip file 
 -->
-<property name="app" value="5.3"/>
+<property name="app" value="6.3"/>
 <!--property file="build.properties"/-->
 <target name="clean">
 	
